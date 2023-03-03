@@ -28,7 +28,7 @@ public class SQLiteConnection implements OperationBD{
 
 
     @Override
-    public void createCount(SavingsAccountDTO account) {
+    public String createCount(SavingsAccountDTO account) {
 
             String sql = "INSERT INTO users (Name,Document,CreationDate,AccountAmount,AccountNumber) VALUES(?,?,?,?,?)";
         try {
@@ -38,26 +38,30 @@ public class SQLiteConnection implements OperationBD{
             pstmt.setString(3, account.creationDate);
             pstmt.setInt(4, account.accountFunds);
             pstmt.setInt(5, account.accountNumber);
-
             pstmt.executeUpdate();
+            return "An account has been created: User:"+account.accountNumber+" "+ account.ownerDocument+ " "+account.creationDate+" "+account.accountFunds+" "+account.accountNumber;
+
+
         }catch (SQLException e) {
             System.out.println(e.getMessage());
+            return "check fields or data type";
         }
 
     }
 
     @Override
-    public void depositMoney(int moneyAmount, int accountNumber) {
+    public String depositMoney(int moneyAmount, int accountNumber) {
+        return "";
 
     }
 
     @Override
-    public void checkBalance(int accountNumber) {
-
+    public String checkBalance(int accountNumber) {
+        return "";
     }
 
     @Override
-    public void transferMoney(MoneySender sender) {
-
+    public String transferMoney(MoneySender sender) {
+        return "";
     }
 }

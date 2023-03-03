@@ -12,8 +12,13 @@ public class Operation {
 
     @PostMapping(path = "/account/SavingsAccount")
     public String createAccount(@RequestBody SavingsAccountDTO savingsAccount) {
-        operationBD.createCount(savingsAccount);
-        return "A new account has been created: ";
+        return operationBD.createCount(savingsAccount);
+
+    }
+    @PutMapping (path = "/account/depositMoney/{moneyAmount}/{accountNumber}")
+    public String depositMoney(@RequestBody int moneyAmount, @RequestBody int accountNumber) {
+        return operationBD.depositMoney(moneyAmount,accountNumber);
+
     }
 
 
