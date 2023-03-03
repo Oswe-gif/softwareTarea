@@ -51,7 +51,20 @@ public class SQLiteConnection implements OperationBD{
 
     @Override
     public String depositMoney(int moneyAmount, int accountNumber) {
-        return "";
+        
+        String sql = "UPDATE users SET AccountAmount + = ? WHERE AccountNumber = ?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, moneyAmount);
+            pstmt.setInt(2, accountNumber);
+            pstmt.executeUpdate();
+            return "An account has been recharged ";
+
+
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return "check fields or data type";
+        }
 
     }
 
