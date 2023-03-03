@@ -30,7 +30,7 @@ public class SQLiteConnection implements OperationBD{
     @Override
     public String createCount(SavingsAccountDTO account) {
 
-            String sql = "INSERT INTO users (Name,Document,CreationDate,AccountAmount,AccountNumber) VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO users (Name,Document,CreationDate,AccountAmount,AccountNumber) VALUES(?,?,?,?,?)";
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, account.ownerName);
@@ -57,7 +57,17 @@ public class SQLiteConnection implements OperationBD{
 
     @Override
     public String checkBalance(int accountNumber) {
-        return "";
+        String sql = "SELECT Name, AccountAmount FROM Users where AccountNumber=?";
+        try {
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, accountNumber);
+            ResultSet rs  = pstmt.executeQuery();
+            return "Name: "+rs.getString("Name") +" Money: $" +rs.getInt("AccountAmount");
+
+        }catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return "check fields or the account does not exist";
+        }
     }
 
     @Override
