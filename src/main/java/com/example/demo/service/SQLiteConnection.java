@@ -52,7 +52,7 @@ public class SQLiteConnection implements OperationBD{
     @Override
     public String depositMoney(int moneyAmount, int accountNumber) {
         
-        String sql = "UPDATE users SET AccountAmount + = ? WHERE AccountNumber = ?";
+        String sql = "UPDATE users SET AccountAmount = AccountAmount + moneyAmount ? WHERE AccountNumber = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, moneyAmount);
