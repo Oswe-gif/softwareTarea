@@ -20,6 +20,11 @@ public class Operation {
         return operationBD.depositMoney(moneyAmount,accountNumber);
 
     }
+    @GetMapping(path = "/account/checkBalance/{accountNumber}")
+    public String depositMoney(@PathVariable int accountNumber) {
+        return operationBD.checkBalance(accountNumber);
+
+    }
 
 
 
