@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.controller.dto.MoneySender;
+import com.example.demo.controller.dto.DepositMoneyUserDto;
+import com.example.demo.controller.dto.MoneySenderDto;
 import com.example.demo.controller.dto.SavingsAccountDTO;
 
 import java.sql.*;
@@ -50,13 +51,13 @@ public class SQLiteConnection implements OperationBD{
     }
 
     @Override
-    public String depositMoney(int moneyAmount, int accountNumber) {
+    public String depositMoney(DepositMoneyUserDto depositMoneyUserDto) {
         
-        String sql = "UPDATE users SET AccountAmount = AccountAmount + moneyAmount ? WHERE AccountNumber = ?";
+        String sql = "UPDATE users SET AccountAmount = (AccountAmount + ? ) WHERE AccountNumber = ?";
         try {
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, moneyAmount);
-            pstmt.setInt(2, accountNumber);
+            pstmt.setInt(1, depositMoneyUserDto.moneyAmount);
+            pstmt.setInt(2, depositMoneyUserDto.accountNumber);
             pstmt.executeUpdate();
             return "An account has been recharged ";
 
@@ -84,7 +85,7 @@ public class SQLiteConnection implements OperationBD{
     }
 
     @Override
-    public String transferMoney(MoneySender sender) {
+    public String transferMoney(MoneySenderDto sender) {
         return "";
     }
 }

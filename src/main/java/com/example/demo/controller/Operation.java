@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.controller.dto.DepositMoneyUserDto;
 import com.example.demo.controller.dto.SavingsAccountDTO;
 import com.example.demo.service.OperationBD;
 import com.example.demo.service.SQLiteConnection;
@@ -15,13 +16,13 @@ public class Operation {
         return operationBD.createCount(savingsAccount);
 
     }
-    @PutMapping (path = "/account/depositMoney/{moneyAmount}/{accountNumber}")
-    public String depositMoney(@RequestBody int moneyAmount, @RequestBody int accountNumber) {
-        return operationBD.depositMoney(moneyAmount,accountNumber);
+    @PutMapping (path = "/account/depositMoney/depositMoneyUser")
+    public String depositMoney(@RequestBody DepositMoneyUserDto depositMoneyUserDto) {
+        return operationBD.depositMoney(depositMoneyUserDto);
 
     }
     @GetMapping(path = "/account/checkBalance/{accountNumber}")
-    public String depositMoney(@PathVariable int accountNumber) {
+    public String checkBalance(@PathVariable int accountNumber) {
         return operationBD.checkBalance(accountNumber);
 
     }
